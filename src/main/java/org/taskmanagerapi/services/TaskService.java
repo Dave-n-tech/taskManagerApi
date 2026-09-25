@@ -1,13 +1,13 @@
 package org.taskmanagerapi.services;
 
 
+import org.springframework.data.domain.Page;
 import org.taskmanagerapi.dtos.request.TaskRequestDto;
 import org.taskmanagerapi.models.Task;
 
-import java.util.List;
 
 public interface TaskService {
-    List<Task> getAllTasks();
+    Page<Task> getAllTasks(int page, int size, String sortBy, String direction);
     Task getTaskById(Long id);
     Task createTask(TaskRequestDto taskDto);
     Task updateTask(Long id, TaskRequestDto taskDto);

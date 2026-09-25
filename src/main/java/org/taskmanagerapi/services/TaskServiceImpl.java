@@ -1,5 +1,9 @@
 package org.taskmanagerapi.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.taskmanagerapi.dtos.request.TaskRequestDto;
 import org.taskmanagerapi.enums.TaskStatus;
@@ -19,8 +23,19 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+    public Page<Task> getAllTasks(int page, int size, String sortBy, String direction) {
+        Sort sort;
+
+        if (sortBy == null || sortBy.isBlank() || sortBy.equalsIgnoreCase("none")) {
+            sort = Sort.unsorted();
+        } else {
+            sort = direction.equalsIgnoreCase(Sort.Direction.DESC.name())
+                    ? Sort.by(sortBy).descending()
+                    : Sort.by(sortBy).ascending();
+        }
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return taskRepository.findAll(pageable);
     }
 
     @Override

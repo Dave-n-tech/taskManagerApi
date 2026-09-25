@@ -1,6 +1,7 @@
 package org.taskmanagerapi.controllers;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,14 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> getAll() {
-        return taskService.getAllTasks();
+    public ResponseEntity<Page<Task>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "none") String sortBy,
+            @RequestParam(defaultValue = "ASC") String direction
+    ) {
+        Page<Task> tasks = taskService.getAllTasks(page, size, sortBy, direction);
+        return ResponseEntity.ok(tasks);
     }
 
     @GetMapping("/{id}")
