@@ -9,7 +9,6 @@ import org.taskmanagerapi.dtos.request.TaskRequestDto;
 import org.taskmanagerapi.models.Task;
 import org.taskmanagerapi.services.TaskService;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/tasks")

@@ -2,6 +2,6 @@ package org.taskmanagerapi.exceptions;
 
 public class TaskNotFoundException extends RuntimeException {
     public TaskNotFoundException(Long id) {
-        super("Task with id " + id + " not found");
+        super("Task not found with id: " + id);
     }
 }
