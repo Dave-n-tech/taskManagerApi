@@ -1,6 +1,6 @@
-# Task Manager API
+# Task Management API
 
-A simple **Spring Boot RESTful API** for managing tasks, designed with clean architecture, strict input validation, central error handling, dynamic data chunking, and separate isolated database profiles.
+A production-ready **Spring Boot RESTful API** for managing tasks, designed with clean architecture, strict input validation, central error handling, dynamic data chunking, and separate isolated database profiles.
 
 ## Features
 
@@ -61,17 +61,117 @@ The application uses an isolated multi-profile strategy to keep development data
 
 ---
 
-## API Endpoints Spec
+## API Endpoints Spec & Data Shapes
 
-### Tasks Resource Under `/api/tasks`
+### 1. Create Task
+* **Method:** `POST`
+* **Endpoint:** `/api/tasks`
+* **Request Body (`TaskRequestDto`):**
+  ```json
+  {
+    "title": "Build Spring Boot API",
+    "description": "Implement CRUD operations, validation, and tests.",
+    "status": "PENDING"
+  }
+  ```
+* **Response Body (`201 Created`):**
+  ```json
+  {
+    "id": 1,
+    "title": "Build Spring Boot API",
+    "description": "Implement CRUD operations, validation, and tests.",
+    "status": "PENDING",
+    "createdAt": "2026-09-26T14:45:00"
+  }
+  ```
 
-| Method | Endpoint | Description | Query Parameters |
-| :--- | :--- | :--- | :--- |
-| **POST** | `/api/tasks` | Create a new task | None |
-| **GET** | `/api/tasks` | Get all tasks (paged) | `page` (default 0), `size` (default 10), `sortBy` (default `none`), `direction` (default `ASC`) |
-| **GET** | `/api/tasks/{id}` | Get task by specific ID | None |
-| **PUT** | `/api/tasks/{id}` | Update task details | None |
-| **DELETE**| `/api/tasks/{id}` | Delete task by ID | None |
+### 2. Get All Tasks (Paged & Sorted)
+* **Method:** `GET`
+* **Endpoint:** `/api/tasks`
+* **Query Parameters:** `page` (default 0), `size` (default 10), `sortBy` (default `none`), `direction` (default `ASC`)
+* **Request Body:** None
+* **Response Body (`200 OK`):**
+  ```json
+  {
+    "content": [
+      {
+        "id": 1,
+        "title": "Build Spring Boot API",
+        "description": "Implement CRUD operations, validation, and tests.",
+        "status": "PENDING",
+        "createdAt": "2026-09-26T14:45:00"
+      }
+    ],
+    "pageable": {
+      "pageNumber": 0,
+      "pageSize": 10,
+      "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      },
+      "offset": 0,
+      "paged": true,
+      "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 1,
+    "last": true,
+    "size": 10,
+    "number": 0,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "numberOfElements": 1,
+    "first": true,
+    "empty": false
+  }
+  ```
+
+### 3. Get Task By ID
+* **Method:** `GET`
+* **Endpoint:** `/api/tasks/{id}`
+* **Request Body:** None
+* **Response Body (`200 OK`):**
+  ```json
+  {
+    "id": 1,
+    "title": "Build Spring Boot API",
+    "description": "Implement CRUD operations, validation, and tests.",
+    "status": "PENDING",
+    "createdAt": "2026-09-26T14:45:00"
+  }
+  ```
+
+### 4. Update Task
+* **Method:** `PUT`
+* **Endpoint:** `/api/tasks/{id}`
+* **Request Body (`TaskRequestDto`):**
+  ```json
+  {
+    "title": "Build Spring Boot API",
+    "description": "Optimized database layer and completed tests.",
+    "status": "IN_PROGRESS"
+  }
+  ```
+* **Response Body (`200 OK`):**
+  ```json
+  {
+    "id": 1,
+    "title": "Build Spring Boot API",
+    "description": "Optimized database layer and completed tests.",
+    "status": "IN_PROGRESS",
+    "createdAt": "2026-09-26T14:45:00"
+  }
+  ```
+
+### 5. Delete Task
+* **Method:** `DELETE`
+* **Endpoint:** `/api/tasks/{id}`
+* **Request Body:** None
+* **Response Body (`24 No Content`):** Empty Response
 
 ---
 
