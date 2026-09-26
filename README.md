@@ -1,4 +1,4 @@
-# Task Management API
+# Task Manager API
 
 A production-ready **Spring Boot RESTful API** for managing tasks, designed with clean architecture, strict input validation, central error handling, dynamic data chunking, and separate isolated database profiles.
 
