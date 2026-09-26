@@ -44,7 +44,6 @@ The application uses an isolated multi-profile strategy to keep development data
    spring.datasource.username=root
    spring.datasource.password=your_mysql_password
    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-   spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
    spring.jpa.hibernate.ddl-auto=update
    ```
 
